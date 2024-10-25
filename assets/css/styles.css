@@ -1,0 +1,175 @@
+/* GLOBAL STYLES */
+@font-face {
+  font-family: "SweetHeart";
+  src: url(/assets/fonts/sweet_heart.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f5f5;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+}
+
+
+h1 {
+  font-family: "SweetHeart";
+}
+
+.game-wrapper {
+  margin: auto;
+  width: 97%;
+  
+}
+.u01 {
+  background: url(/assets/img/f-ue.gif) repeat-x;
+  height: 35px;
+  margin: 0 19px;
+}
+.s01 {
+  background: url(/assets/img/f-sita.gif) repeat-x;
+  height: 35px;
+  margin: 0 19px;
+}
+.box-top {
+  background-image: url(/assets/img/f-kado1.gif), url(/assets/img/f-kado2.gif);
+  background-position: top left, top right;
+  background-repeat: no-repeat, no-repeat;
+  height: 35px;
+}
+.box-center {
+  background-image: url(/assets/img/f-migi.gif), url(/assets/img/f-hidari.gif);
+  background-position: top right, top left;
+  background-repeat: repeat-y, repeat-y;
+  padding: 10px 29px;
+}
+.box-bottom {
+  background-image: url(/assets/img/f-kado3.gif), url(/assets/img/f-kado4.gif);
+  background-position: top left, top right;
+  background-repeat: no-repeat, no-repeat;
+  height: 35px;
+}
+
+.game-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  background-color: #f8f9fa;
+  border-radius: 25px;
+  padding: 50px;
+  height: 70%;
+  border: 2px solid black;
+  flex-wrap: wrap;
+  background-image: url("/assets/img/x03-bg-checked.gif");
+
+}
+
+/* LEFT PANEL */
+.left-panel {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #343a40;
+  padding: 50px;
+}
+
+.left-panel h2 {
+  text-align: center;
+  color: red;
+}
+
+#start-button {
+  padding: 10px 20px;
+  background-color: #6c757d;
+  color: red;
+  border: 2px solid red;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+  text-align: center;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+  flex: 2;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #28a745;
+
+  padding: 50px;
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: aqua;
+}
+
+#canvas-game {
+  width: 100%;
+  max-width: 550px; /* Ajustado para que coincida con el tamaño definido en JS */
+  height: auto;
+  border: 2px solid black;
+  background-color: #6c757d;
+  padding: 20px;
+}
+
+/* COUNTER AND PAUSE */
+.counter {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #dc3545;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+}
+
+.pause-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #dc3545;
+  padding: 15px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  display: flex;
+  flex-direction: row; 
+  justify-content:right;
+  align-items: center;
+  padding: 20px;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 768px) {
+  .game-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel,
+  .right-panel {
+    margin-bottom: 10px;
+  }
+}

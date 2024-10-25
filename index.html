@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Layout</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    
+    <h1>GAME TITLE</h1>
+
+    <section>
+      <div class="game-wrapper">
+        <div class="box-top">
+          <div class="u01"></div>
+        </div>
+        <div class="box-center">
+          <!-- Game container -->
+          <div class="game-container">
+            <div class="left-panel">
+              <h2>Game Instructions</h2>
+              <button id="start-button">START BUTTON</button>
+            </div>
+
+            <div class="right-panel">
+              <div class="canvas-container">
+                <canvas id="canvas-game"></canvas>
+              </div>
+              <div class="buttons-right">
+                <div class="counter">COUNTER</div>
+                <div class="pause-button">PAUSE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box-bottom">
+          <div class="s01"></div>
+        </div>
+      </div>
+
+      <footer>
+        MADE BY SARA 2024
+        <img src="/assets/img/tumblr_m2zqj3irDU1qb1380540 .gif" />
+      </footer>
+    </section>
+
+    <script src="assets/js/constants.js"></script>
+    <script src="assets/js/models/food.js"></script>
+    <script src="assets/js/models/animal.js"></script>
+    <script src="assets/js/models/background.js"></script>
+    <script src="assets/js/models/game.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
