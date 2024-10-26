@@ -12,8 +12,23 @@ class Game {
     this.animal = new Animal(this.ctx);
 
     this.food = [];
-    this.drawFoodCount = 0;
+    this.tick = 0;
+
+    this.score = 0;
+
+    this.setListeners();
   }
+
+  setListeners() {
+    document.addEventListener('keydown', (event) => {
+      this.onKeyEvent(event);
+    });
+  
+    document.addEventListener('keyup', () => {
+      this.animal.onKeyUp(); 
+    });
+  }
+
 
   onKeyEvent(event) {
     if (event.keyCode === SPACE) {
@@ -28,14 +43,45 @@ class Game {
       this.drawIntervalId = setInterval(() => {
         this.clear();
         this.draw();
+        this.move();
+        this.checkCollisions();
         this.tick++;
 
-        if (this.tick >= 50) {
+        if (this.tick >= 90) {
           this.tick = 0;
           this.addFood();
         }
+        
       }, this.fps);
     }
+  }
+
+  addFood() {
+    // We keep only the food that is within the canvas
+    this.food = this.food.filter((food) => food.y < this.canvas.height); 
+
+    const types = ["carrot", "meat", "candy", "bug"];
+    const randomFood = types[Math.floor(Math.random() * types.length)];
+
+    const newFood = new Food(this.ctx, randomFood);
+    this.food.push(newFood);
+
+    console.log(`Food on canvas: ${this.food.length}`);
+  }
+
+
+  checkCollisions() {
+    this.food = this.food.filter((food) => {
+      const foodIsColliding = this.animal.collisionsFood(food);
+      if (foodIsColliding) {
+        this.score += 1; 
+        console.log(`Score: ${this.score}`);
+      }
+    
+      return !foodIsColliding; 
+  
+    });
+    
   }
 
   stop() {
@@ -50,7 +96,11 @@ class Game {
   draw() {
     this.background.draw();
     this.animal.draw();
+    this.food.forEach((food) => food.draw());
   }
 
-  move() {}
+  move() {
+    this.food.forEach((food) => food.move());
+    this.animal.move();
+  }
 }

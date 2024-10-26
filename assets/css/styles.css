@@ -15,11 +15,10 @@ body {
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
 
 h1 {
   font-family: "SweetHeart";
@@ -28,7 +27,6 @@ h1 {
 .game-wrapper {
   margin: auto;
   width: 97%;
-  
 }
 .u01 {
   background: url(/assets/img/f-ue.gif) repeat-x;
@@ -70,7 +68,6 @@ h1 {
   border: 2px solid black;
   flex-wrap: wrap;
   background-image: url("/assets/img/x03-bg-checked.gif");
-
 }
 
 /* LEFT PANEL */
@@ -104,59 +101,70 @@ h1 {
 .right-panel {
   flex: 2;
   position: relative;
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #28a745;
-
-  padding: 50px;
+  padding: 30px;
 }
 
 .canvas-container {
+  position: relative; 
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: aqua;
+  background-color: chartreuse;
 }
 
 #canvas-game {
   width: 100%;
-  max-width: 550px; /* Ajustado para que coincida con el tamaño definido en JS */
-  height: auto;
-  border: 2px solid black;
+  max-width: 550px; 
+  margin-top: 50px;
   background-color: #6c757d;
-  padding: 20px;
 }
 
-/* COUNTER AND PAUSE */
+/* BUTTONS-RIGHT*/
+.buttons-right {
+  position: absolute; 
+  width: 100%;
+  top: 10px; 
+  display: flex; 
+  justify-content:space-evenly; 
+  padding: 10px;
+  background-color: burlywood;
+}
+
 .counter {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: #dc3545;
+  background-color: #dc3545; 
   padding: 10px;
   color: white;
   border-radius: 5px;
 }
 
-.pause-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #dc3545;
-  padding: 15px;
-  border-radius: 50%;
+.lives {
+  background-color: #dc3545; 
+  padding: 10px;
   color: white;
-  cursor: pointer;
+  border-radius: 5px;
+  right: 20px;
+}
+
+.pause{
+  background-color: #dc3545; 
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  
 }
 
 /* FOOTER */
 footer {
   display: flex;
-  flex-direction: row; 
-  justify-content:right;
+  flex-direction: row;
+  justify-content: right;
   align-items: center;
   padding: 20px;
 }

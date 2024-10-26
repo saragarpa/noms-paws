@@ -1,5 +1,6 @@
 class Animal {
-  constructor(ctx, type = "dog") { //starting animal is "dog"
+  constructor(ctx, type = "dog") {
+    //starting animal is "dog"
     this.ctx = ctx;
 
     this.width = 80;
@@ -10,7 +11,7 @@ class Animal {
     this.y = this.ctx.canvas.height * 0.8 - this.height / 2;
 
     this.type = type; // dog or rabbit
-    this.speed = 5;
+    this.speed = 6;
 
     // Images
     this.dogImg = new Image();
@@ -25,7 +26,7 @@ class Animal {
     this.frameIndex = 0; // Current animation index
 
     this.isMoving = false;
-    this.facingDirection = "left"; 
+    this.facingDirection = "left";
   }
 
   draw() {
@@ -37,23 +38,39 @@ class Animal {
       img = this.rabbitImg;
     }
 
+    // Si la dirección es 'right', se invierte la imagen
+    if (this.facingDirection === "right") {
+      this.ctx.save(); // Guardamos como está la imagen actualmente antes de girarla
+      this.ctx.scale(-1, 1); // Invertir la escala horizontalmente
 
-    this.ctx.drawImage(
-      img,
-      (this.frameIndex / this.frames) * img.width - 30, // Horizontal
-      0, // Verticak
-      (1 / this.frames) * img.width, // Width Frame
-      img.height, // Height
-      this.x,
-      this.y,
-      this.width,
-      this.height
-    );
+      // La imagen cuando mira a "right"
+      this.ctx.drawImage(
+        img,
+        (this.frameIndex / this.frames) * img.width - 30, // Parte horizontal
+        0, // Parte vertical (usamos el primer sprite)
+        (1 / this.frames) * img.width, // Ancho del frame
+        img.height, // Altura de la imagen
+        -this.x - this.width, // Ajustar posición x
+        this.y,
+        this.width,
+        this.height
+      );
 
-    // Invert image
-    
-
-      
+      //La imagen cuando mira a "left"
+      this.ctx.restore();
+    } else {
+      this.ctx.drawImage(
+        img,
+        (this.frameIndex / this.frames) * img.width - 30, // Parte horizontal
+        0, // Parte vertical (usamos el primer sprite)
+        (1 / this.frames) * img.width, // Ancho del frame
+        img.height, // Altura de la imagen
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+    }
   }
 
   animate() {
@@ -71,30 +88,37 @@ class Animal {
     }
   }
 
+  move() {
+    if (this.x < 0) this.x = 0;
+    if (this.x + this.width > this.ctx.canvas.width) {
+      this.x = this.ctx.canvas.width - this.width;
+    }
+  }
+
   onKeyDown(keyCode) {
     if (keyCode === KEY_RIGHT && this.x + this.width < this.ctx.canvas.width) {
       this.x += this.speed;
       this.isMoving = true;
-      this.facingDirection = "right"; 
-      
+      this.facingDirection = "right";
     } else if (keyCode === KEY_LEFT && this.x > 0) {
       this.x -= this.speed;
       this.isMoving = true;
-      this.facingDirection = "left"; 
+      this.facingDirection = "left";
     }
-
 
     if (keyCode === KEY_DOWN && this.y + this.height < this.ctx.canvas.height) {
       this.y += this.speed;
       this.isMoving = true;
-
-    } else if (keyCode === KEY_UP && this.y > this.ctx.canvas.height * 0.8 - this.height / 2) {
+    } else if (
+      keyCode === KEY_UP &&
+      this.y > this.ctx.canvas.height * 0.8 - this.height / 2
+    ) {
       this.y -= this.speed;
       this.isMoving = true;
     }
 
     this.animate();
-    this.checkCollision();
+    this.move();
   }
 
   onKeyUp() {
@@ -111,10 +135,22 @@ class Animal {
     this.frameIndex = 0; // When animal changes it starts on the first frame
   }
 
-  checkCollision() {
-    if (this.x < 0) this.x = 0;
-    if (this.x + this.width > this.ctx.canvas.width) {
-      this.x = this.ctx.canvas.width - this.width;
-    }
+  collisionsFood(food) {
+    const animalTop = this.y;
+    const animalLeft = this.x;
+    const animalRight = this.x + this.width;
+
+    const foodTop = food.y;
+    const foodBottom = food.y + food.height;
+    const foodLeft = food.x;
+    const foodRight = food.x + this.width;
+
+    return (
+      foodBottom > animalTop &&
+      foodTop < animalTop &&
+      foodRight > animalLeft &&
+      foodLeft < animalRight
+    );
+    
   }
 }
