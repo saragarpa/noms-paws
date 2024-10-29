@@ -20,15 +20,14 @@ class Game {
   }
 
   setListeners() {
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener("keydown", (event) => {
       this.onKeyEvent(event);
     });
-  
-    document.addEventListener('keyup', () => {
-      this.animal.onKeyUp(); 
+
+    document.addEventListener("keyup", (event) => {
+      this.animal.onKeyUp(event);
     });
   }
-
 
   onKeyEvent(event) {
     if (event.keyCode === SPACE) {
@@ -51,14 +50,17 @@ class Game {
           this.tick = 0;
           this.addFood();
         }
-        
+
+        if (this.animal.lives <= 0) {
+          console.log(`RIP Animal`);
+        }
       }, this.fps);
     }
   }
 
   addFood() {
     // We keep only the food that is within the canvas
-    this.food = this.food.filter((food) => food.y < this.canvas.height); 
+    this.food = this.food.filter((food) => food.y < this.canvas.height);
 
     const types = ["carrot", "meat", "candy", "bug"];
     const randomFood = types[Math.floor(Math.random() * types.length)];
@@ -69,19 +71,22 @@ class Game {
     console.log(`Food on canvas: ${this.food.length}`);
   }
 
-
   checkCollisions() {
     this.food = this.food.filter((food) => {
       const foodIsColliding = this.animal.collisionsFood(food);
       if (foodIsColliding) {
-        this.score += 1; 
+        if (food.type === "candy") {
+          this.score += 30;
+        } else if (food.type === "meat" || food.type === "carrot") {
+          this.score += 10;
+        }
         console.log(`Score: ${this.score}`);
+        console.log(`Lives: ${this.animal.lives}`);
+
+        return false; // Clean food when collides
       }
-    
-      return !foodIsColliding; 
-  
+      return true;
     });
-    
   }
 
   stop() {
@@ -97,10 +102,20 @@ class Game {
     this.background.draw();
     this.animal.draw();
     this.food.forEach((food) => food.draw());
+    this.drawCounters();
+  }
+
+  drawCounters() {
+    const scoreContainer = document.getElementById("score");
+    const scoreText = document.createTextNode(`SCORE: ${this.score}`);
+    //scoreContainer.appendChild(scoreText);
+
+    const livesContainer = document.getElementById("lives");
+    const livesText = document.createTextNode(`LIVES: ${this.animal.lives}`);
+    //livesContainer.appendChild(livesText)
   }
 
   move() {
     this.food.forEach((food) => food.move());
-    this.animal.move();
   }
 }

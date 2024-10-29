@@ -11,7 +11,7 @@ class Animal {
     this.y = this.ctx.canvas.height * 0.8 - this.height / 2;
 
     this.type = type; // dog or rabbit
-    this.speed = 6;
+    this.speed = 7;
 
     // Images
     this.dogImg = new Image();
@@ -27,6 +27,9 @@ class Animal {
 
     this.isMoving = false;
     this.facingDirection = "left";
+
+    this.score = 0;
+    this.lives = 3;
   }
 
   draw() {
@@ -88,8 +91,10 @@ class Animal {
     }
   }
 
-  move() {
-    if (this.x < 0) this.x = 0;
+  canvasCollision() {
+    if (this.x < 0) {
+      this.x = 0;
+    } 
     if (this.x + this.width > this.ctx.canvas.width) {
       this.x = this.ctx.canvas.width - this.width;
     }
@@ -118,7 +123,7 @@ class Animal {
     }
 
     this.animate();
-    this.move();
+    this.canvasCollision();
   }
 
   onKeyUp() {
@@ -145,12 +150,37 @@ class Animal {
     const foodLeft = food.x;
     const foodRight = food.x + this.width;
 
-    return (
+    const collisionWithHead =
       foodBottom > animalTop &&
       foodTop < animalTop &&
       foodRight > animalLeft &&
-      foodLeft < animalRight
-    );
-    
+      foodLeft < animalRight;
+
+    if (collisionWithHead) {
+      switch (food.type) {
+        case "candy":
+          this.score += 30;
+          break;
+        case "bug":
+          this.lives -= 1;
+          break;
+        case "meat":
+          if (this.type === "dog") {
+            this.score += 10;
+          } else {
+            this.lives -= 1;
+          }
+          break;
+        case "carrot":
+          if (this.type === "rabbit") {
+            this.score += 10;
+          } else {
+            this.lives -= 1;
+          }
+          break;
+      }
+      return true;
+    }
+    return false;
   }
 }
