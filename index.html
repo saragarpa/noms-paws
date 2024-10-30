@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
-    
     <h1>GAME TITLE</h1>
 
     <section>
@@ -20,14 +19,27 @@
           <div class="game-container">
             <div class="left-panel">
               <h2>Game Instructions</h2>
-              
             </div>
 
             <div class="right-panel">
               <div class="canvas-container">
+                <!-- Start Screen -->
+                <div id="start-screen" class="start-screen">
+                  <button id="start-button">START BUTTON</button>
+                </div>
+
                 <canvas id="canvas-game" width="800" height="600"></canvas>
-                <button id="start-button">START BUTTON</button>
+
+                <div
+                  id="game-over-screen"
+                  class="game-over-screen"
+                  style="display: none"
+                >
+                  <h2>GAME OVER</h2>
+                  <button id="restart-button">RESTART</button>
+                </div>
               </div>
+
               <div class="buttons-right">
                 <div id="score">COUNTER</div>
                 <div id="lives">LIVES</div>
@@ -43,8 +55,9 @@
       </div>
 
       <footer>
+        <img src="/assets/img/hcf03-flower-tulips.gif" />
         MADE BY SARA 2024
-        <img src="/assets/img/tumblr_m2zqj3irDU1qb1380540 .gif"/>
+        <img src="/assets/img/hcf03-flower-tulips.gif" />
       </footer>
     </section>
 

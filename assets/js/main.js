@@ -1,5 +1,8 @@
 window.addEventListener('load', () => {
   const game = new Game("canvas-game");
 
-  game.start();
+   
+   document.getElementById("start-button").addEventListener("click", () => {
+    game.startGame(); 
+  });
 });

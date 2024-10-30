@@ -17,16 +17,29 @@ class Game {
     this.score = 0;
 
     this.setListeners();
+
+    this.isGameRunning = false; // Game doesn't start initially
   }
 
   setListeners() {
     document.addEventListener("keydown", (event) => {
-      this.onKeyEvent(event);
+      if (this.isGameRunning) {
+        this.onKeyEvent(event);
+      }
     });
 
     document.addEventListener("keyup", (event) => {
-      this.animal.onKeyUp(event);
+      if (this.isGameRunning) {
+        this.animal.onKeyUp(event);
+      }
     });
+  }
+
+  startGame() {
+    this.isGameRunning = true;
+    const startScreen = document.getElementById("start-screen");
+    startScreen.remove();
+    this.start();
   }
 
   onKeyEvent(event) {
@@ -52,6 +65,7 @@ class Game {
         }
 
         if (this.animal.lives <= 0) {
+          this.gameOver();
           console.log(`RIP Animal`);
         }
       }, this.fps);
@@ -89,10 +103,12 @@ class Game {
     });
   }
 
-  stop() {
+  pause() {
+    this.isGameRunning = false; 
     clearInterval(this.drawIntervalId);
     this.drawIntervalId = undefined;
   }
+
 
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -106,16 +122,45 @@ class Game {
   }
 
   drawCounters() {
+    //SCORES
     const scoreContainer = document.getElementById("score");
-    const scoreText = document.createTextNode(`SCORE: ${this.score}`);
-    //scoreContainer.appendChild(scoreText);
+    scoreContainer.textContent = `SCORE: ${this.score}`;
 
+    // LIVES
     const livesContainer = document.getElementById("lives");
-    const livesText = document.createTextNode(`LIVES: ${this.animal.lives}`);
-    //livesContainer.appendChild(livesText)
+    livesContainer.innerHTML = "";
+    livesContainer.textContent = "LIVES: ";
+
+    // Add Heart PNG
+    for (let i = 0; i < this.animal.lives; i++) {
+      const heartImg = document.createElement("img");
+      heartImg.classList.add("heart-icon");
+      heartImg.src = "/assets/img/heart.png";
+      livesContainer.appendChild(heartImg);
+    }
   }
 
   move() {
     this.food.forEach((food) => food.move());
+  }
+
+
+  gameOver() {
+    this.pause(); 
+
+    // Draw game over message
+    this.ctx.font = "50px Arial";
+    this.ctx.fillStyle = "red";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText(
+      "GAME OVER",
+      this.ctx.canvas.width / 2,
+      this.ctx.canvas.height / 2
+    );
+
+    
+    // Add game over image BG and image
+    
+    
   }
 }
