@@ -11,7 +11,6 @@
 }
 
 body {
-  background-color: #f5f5f5;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -21,14 +20,14 @@ body {
   background-image: url("/assets/img/g01-bg-flower.gif");
 }
 
+#game-wrapper {
+  background-color: darkseagreen;
+}
+
 h1 {
   font-family: "SweetHeart";
 }
 
-.game-wrapper {
-  margin: auto;
-  width: 97%;
-}
 .u01 {
   background: url(/assets/img/f-ue.gif) repeat-x;
   height: 35px;
@@ -116,12 +115,44 @@ h1 {
   height: 90%;
   margin-top: 50px;
   display: flex;
-  margin-top: 50px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: orange;
 }
+
+#game-over-screen {
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  margin-top: 50px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+}
+
+#pause-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 
 #start-button {
   padding: 10px 20px;
@@ -139,17 +170,8 @@ h1 {
   background-color: #6c757d;
 }
 
-.game-over-screen {
-  position: absolute;
-  width: 100%;
-  height: 90%;
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: aquamarine;
-}
+
+
 
 
 /* BUTTONS-RIGHT*/
@@ -203,9 +225,8 @@ footer {
   justify-content: right;
   align-items: flex-end;
   padding: 20px;
+  background-color: darkorchid;
 }
-
-
 
 
 /* RESPONSIVE STYLES */

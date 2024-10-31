@@ -16,30 +16,50 @@ class Game {
 
     this.score = 0;
 
-    this.setListeners();
-
     this.isGameRunning = false; // Game doesn't start initially
+    this.isPaused = false;
+
+    this.setListeners();
   }
 
+  
   setListeners() {
+    // Movements Animals
     document.addEventListener("keydown", (event) => {
-      if (this.isGameRunning) {
+      if (this.isGameRunning && !this.isPaused) {
         this.onKeyEvent(event);
       }
     });
 
     document.addEventListener("keyup", (event) => {
-      if (this.isGameRunning) {
+      if (this.isGameRunning && !this.isPaused) {
         this.animal.onKeyUp(event);
       }
     });
-  }
 
-  startGame() {
-    this.isGameRunning = true;
-    const startScreen = document.getElementById("start-screen");
-    startScreen.remove();
-    this.start();
+     // Game Screens Buttons
+    const restartButtons = document.querySelectorAll("#restart-button");
+    restartButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        this.restartGame();
+      });
+    });
+
+    const quitButtons = document.querySelectorAll("#quit-button");
+    quitButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        this.quitGame();
+      });
+    });
+
+    document.getElementById("pause-button").addEventListener("click", () => {
+      this.pause();
+    });
+
+    
+    document.getElementById("return-button").addEventListener("click", () => {
+      this.resumeGame();
+    });
   }
 
   onKeyEvent(event) {
@@ -49,6 +69,81 @@ class Game {
       this.animal.onKeyDown(event.keyCode);
     }
   }
+
+
+  // *****GAME SCREENS*****
+  startGame() {
+    this.isGameRunning = true;
+    const startScreen = document.getElementById("start-screen");
+    startScreen.style.display = "none";
+    this.start();
+  }
+
+
+  pause() {
+    if (this.isGameRunning && !this.isPaused) {
+      this.isPaused = true; 
+      clearInterval(this.drawIntervalId);
+      this.drawIntervalId = undefined;
+      document.getElementById("pause-screen").style.display = "flex"; 
+    }
+  }
+
+  gameOver() {
+    this.pause();
+    const gameOverScreen = document.getElementById("game-over-screen");
+    gameOverScreen.style.display = "flex";
+    
+    document.getElementById("pause-screen").style.display = "none"; 
+  }
+  // **********************
+
+
+
+
+  // ++++++ GAME-SCREENS BUTTONS LOGIC ++++++ 
+  resumeGame() {
+    if (this.isPaused) {
+      this.isPaused = false; 
+      this.start(); // Continue game
+      document.getElementById("pause-screen").style.display = "none"; 
+    }
+  }
+
+  resetGame() {
+    this.pause();
+
+    // Reset all parameters
+    this.score = 0;
+    this.animal.lives = 3;
+    this.food = [];
+    this.tick = 0;
+    this.animal.x = this.ctx.canvas.width / 2 - this.animal.width / 2;
+    this.animal.y = this.ctx.canvas.height * 0.8 - this.animal.height / 2;
+    this.animal.frameIndex = 0;
+
+    document.getElementById("game-over-screen").style.display = "none";
+    document.getElementById("pause-screen").style.display = "none"; 
+
+    // Restart game state
+    this.isGameRunning = false;
+    this.isPaused = false;
+  }
+ 
+  restartGame() {
+    this.resetGame();
+    this.startGame(); // Starts directly without showing start-screen
+  }
+
+  quitGame() {
+    this.resetGame();
+    document.getElementById("start-screen").style.display = "flex"; 
+    document.getElementById("game-over-screen").style.display = "none"; 
+  }
+
+  // ++++++++++++++++++++++++++++++++++++++ 
+
+
 
   start() {
     if (!this.drawIntervalId) {
@@ -64,7 +159,7 @@ class Game {
           this.addFood();
         }
 
-        if (this.animal.lives <= 0) {
+        if (this.animal.lives < 0) {
           this.gameOver();
           console.log(`RIP Animal`);
         }
@@ -103,13 +198,6 @@ class Game {
     });
   }
 
-  pause() {
-    this.isGameRunning = false; 
-    clearInterval(this.drawIntervalId);
-    this.drawIntervalId = undefined;
-  }
-
-
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
@@ -122,7 +210,7 @@ class Game {
   }
 
   drawCounters() {
-    //SCORES
+    // SCORES
     const scoreContainer = document.getElementById("score");
     scoreContainer.textContent = `SCORE: ${this.score}`;
 
@@ -142,25 +230,5 @@ class Game {
 
   move() {
     this.food.forEach((food) => food.move());
-  }
-
-
-  gameOver() {
-    this.pause(); 
-
-    // Draw game over message
-    this.ctx.font = "50px Arial";
-    this.ctx.fillStyle = "red";
-    this.ctx.textAlign = "center";
-    this.ctx.fillText(
-      "GAME OVER",
-      this.ctx.canvas.width / 2,
-      this.ctx.canvas.height / 2
-    );
-
-    
-    // Add game over image BG and image
-    
-    
   }
 }

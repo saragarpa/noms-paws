@@ -8,50 +8,61 @@
   </head>
   <body>
     <h1>GAME TITLE</h1>
+    <div id="game-wrapper">
+      <div class="box-top">
+        <div class="u01"></div>
+      </div>
+      <div class="box-center">
+        <div class="game-container">
 
-    <section>
-      <div class="game-wrapper">
-        <div class="box-top">
-          <div class="u01"></div>
-        </div>
-        <div class="box-center">
-          <!-- Game container -->
-          <div class="game-container">
-            <div class="left-panel">
-              <h2>Game Instructions</h2>
-            </div>
+          <!-- LEFT PANEL -->
+          <div class="left-panel">
+            <h2>Game Instructions</h2>
+          </div>
 
-            <div class="right-panel">
-              <div class="canvas-container">
-                <!-- Start Screen -->
-                <div id="start-screen" class="start-screen">
-                  <button id="start-button">START BUTTON</button>
-                </div>
+          <!--RIGHT PANEL -->
+          <div class="right-panel">
+            <div class="canvas-container">
+              <!-- Start Screen -->
+              <div id="start-screen" class="start-screen">
+                <button id="start-button">START BUTTON</button>
+              </div>
 
-                <canvas id="canvas-game" width="800" height="600"></canvas>
+              <!-- GameOver Screen -->
+              <div
+                id="game-over-screen"
+                class="game-over-screen"
+                style="display: none"
+              >
+                <h2>GAME OVER</h2>
+                <button id="restart-button">RESTART</button>
+                <button id="quit-button">QUIT</button>
+              </div>
 
-                <div
-                  id="game-over-screen"
-                  class="game-over-screen"
-                  style="display: none"
-                >
-                  <h2>GAME OVER</h2>
+              <!-- Pause Screen -->
+              <div id="pause-screen" style="display: none">
+                <h2>Juego en Pausa</h2>
+                <div class="button-container">
+                  <button id="return-button">RETURN</button>
                   <button id="restart-button">RESTART</button>
+                  <button id="quit-button">QUIT</button>
                 </div>
               </div>
 
-              <div class="buttons-right">
-                <div id="score">COUNTER</div>
-                <div id="lives">LIVES</div>
-                <button class="pause">PAUSE</button>
-              </div>
+              <!-- Canvas -->
+              <canvas id="canvas-game" width="800" height="600"></canvas>
+            </div>
+            <div class="buttons-right">
+              <div id="score">COUNTER</div>
+              <div id="lives">LIVES</div>
+              <button id="pause-button">PAUSE</button>
             </div>
           </div>
+          
         </div>
-
-        <div class="box-bottom">
-          <div class="s01"></div>
-        </div>
+      </div>
+      <div class="box-bottom">
+        <div class="s01"></div>
       </div>
 
       <footer>
@@ -59,7 +70,7 @@
         MADE BY SARA 2024
         <img src="/assets/img/hcf03-flower-tulips.gif" />
       </footer>
-    </section>
+    </div>
 
     <script src="assets/js/constants.js"></script>
     <script src="assets/js/models/food.js"></script>
