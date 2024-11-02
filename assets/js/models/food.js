@@ -1,5 +1,5 @@
 class Food {
-  constructor(ctx, type) {
+  constructor(ctx, type, score) {
     this.ctx = ctx;
     this.type = type;
 
@@ -12,7 +12,7 @@ class Food {
     this.width = 50;
     this.height = 50;
 
-    this.speed = 2;
+    this.speed = 2 + Math.floor(score / 100) * 0.5;
   }
 
   draw() {

@@ -19,10 +19,15 @@ class Game {
     this.isGameRunning = false; // Game doesn't start initially
     this.isPaused = false;
 
+    // Audios
+    this.gameAudio = new Audio("/assets/sounds/game-audio.mp3");
+    this.correctSound = new Audio("/assets/sounds/correct.mp3");
+    this.incorrectSound = new Audio("/assets/sounds/incorrect.mp3");
+    this.clickSound = new Audio("/assets/sounds/click.wav");
+
     this.setListeners();
   }
 
-  
   setListeners() {
     // Movements Animals
     document.addEventListener("keydown", (event) => {
@@ -37,16 +42,16 @@ class Game {
       }
     });
 
-     // Game Screens Buttons
+    // Game Screens Buttons
     const restartButtons = document.querySelectorAll("#restart-button");
-    restartButtons.forEach(button => {
+    restartButtons.forEach((button) => {
       button.addEventListener("click", () => {
         this.restartGame();
       });
     });
 
     const quitButtons = document.querySelectorAll("#quit-button");
-    quitButtons.forEach(button => {
+    quitButtons.forEach((button) => {
       button.addEventListener("click", () => {
         this.quitGame();
       });
@@ -56,10 +61,26 @@ class Game {
       this.pause();
     });
 
-    
     document.getElementById("return-button").addEventListener("click", () => {
       this.resumeGame();
     });
+
+    document.getElementById("ranking").addEventListener("click", () => {
+      this.showScores();
+    });
+
+    // Audio slider
+    const volumeSlider = document.getElementById("volume-slider");
+    volumeSlider.addEventListener("input", (event) => {
+      this.setVolume(event.target.value);
+    });
+  }
+
+  setVolume(volume) {
+    this.gameAudio.volume = volume;
+    this.correctSound.volume = volume;
+    this.incorrectSound.volume = volume;
+    this.clickSound.volume = volume;
   }
 
   onKeyEvent(event) {
@@ -71,21 +92,67 @@ class Game {
   }
 
 
+
+  // ***********RANKING SYSTEM***********
+  
+  saveScore(score) {
+    // If there are scores --> convert it(parse) to Array // If not empty array
+    let scores = localStorage.getItem("scores")
+      ? JSON.parse(localStorage.getItem("scores"))
+      : [];
+    console.log(scores);
+
+    scores.push(score);
+    scores.sort((a, b) => b - a);
+    scores = scores.slice(0, 3);
+
+    // Save current array scores as a JSON string
+    localStorage.setItem("scores", JSON.stringify(scores));
+  }
+
+  showScores() {
+    const rankingScreen = document.getElementById("ranking-screen");
+    const rankingList = document.getElementById("ranking-list");
+    rankingList.innerHTML = "";
+
+    // If there are scores --> convert it(parse) to Array // If not empty array
+    const scores = localStorage.getItem("scores")
+      ? JSON.parse(localStorage.getItem("scores"))
+      : [];
+
+    scores.forEach((score) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${score} points`;
+      rankingList.appendChild(listItem);
+    });
+
+    rankingScreen.style.display = "flex";
+  }
+  // ***********************************
+
+
+
   // *****GAME SCREENS*****
   startGame() {
     this.isGameRunning = true;
     const startScreen = document.getElementById("start-screen");
     startScreen.style.display = "none";
+
+    this.gameAudio.loop = true;
+    this.gameAudio.play();
+
     this.start();
   }
 
-
   pause() {
     if (this.isGameRunning && !this.isPaused) {
-      this.isPaused = true; 
+      this.isPaused = true;
       clearInterval(this.drawIntervalId);
       this.drawIntervalId = undefined;
-      document.getElementById("pause-screen").style.display = "flex"; 
+
+      this.gameAudio.pause();
+
+      document.getElementById("pause-screen").style.display = "flex";
     }
   }
 
@@ -93,20 +160,23 @@ class Game {
     this.pause();
     const gameOverScreen = document.getElementById("game-over-screen");
     gameOverScreen.style.display = "flex";
-    
-    document.getElementById("pause-screen").style.display = "none"; 
+
+    document.getElementById("pause-screen").style.display = "none";
+
+    this.saveScore(this.score);
   }
   // **********************
 
 
 
-
-  // ++++++ GAME-SCREENS BUTTONS LOGIC ++++++ 
+  // ++++++ GAME-SCREENS BUTTONS LOGIC ++++++
   resumeGame() {
     if (this.isPaused) {
-      this.isPaused = false; 
+      this.isPaused = false;
+
+      this.gameAudio.play();
       this.start(); // Continue game
-      document.getElementById("pause-screen").style.display = "none"; 
+      document.getElementById("pause-screen").style.display = "none";
     }
   }
 
@@ -123,27 +193,33 @@ class Game {
     this.animal.frameIndex = 0;
 
     document.getElementById("game-over-screen").style.display = "none";
-    document.getElementById("pause-screen").style.display = "none"; 
+    document.getElementById("pause-screen").style.display = "none";
 
     // Restart game state
     this.isGameRunning = false;
     this.isPaused = false;
   }
- 
+
   restartGame() {
     this.resetGame();
     this.startGame(); // Starts directly without showing start-screen
+    this.gameAudio.currentTime = 0; // Reset audio to the beginning
   }
 
   quitGame() {
     this.resetGame();
-    document.getElementById("start-screen").style.display = "flex"; 
-    document.getElementById("game-over-screen").style.display = "none"; 
+    document.getElementById("start-screen").style.display = "flex";
+    document.getElementById("game-over-screen").style.display = "none";
+    document.getElementById("ranking-screen").style.display = "none";
+
+    this.gameAudio.pause();
+    this.gameAudio.currentTime = 0;
   }
+  // ++++++++++++++++++++++++++++++++++++++
 
-  // ++++++++++++++++++++++++++++++++++++++ 
-
-
+  clear() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
 
   start() {
     if (!this.drawIntervalId) {
@@ -154,7 +230,7 @@ class Game {
         this.checkCollisions();
         this.tick++;
 
-        if (this.tick >= 90) {
+        if (this.tick >= 65) {
           this.tick = 0;
           this.addFood();
         }
@@ -168,13 +244,13 @@ class Game {
   }
 
   addFood() {
-    // We keep only the food that is within the canvas
+    // Keep only food that is within canvas
     this.food = this.food.filter((food) => food.y < this.canvas.height);
 
     const types = ["carrot", "meat", "candy", "bug"];
     const randomFood = types[Math.floor(Math.random() * types.length)];
 
-    const newFood = new Food(this.ctx, randomFood);
+    const newFood = new Food(this.ctx, randomFood, this.score);
     this.food.push(newFood);
 
     console.log(`Food on canvas: ${this.food.length}`);
@@ -182,24 +258,47 @@ class Game {
 
   checkCollisions() {
     this.food = this.food.filter((food) => {
-      const foodIsColliding = this.animal.collisionsFood(food);
-      if (foodIsColliding) {
+      const isColliding = this.checkFoodCollision(food);
+      if (isColliding) {
         if (food.type === "candy") {
           this.score += 30;
-        } else if (food.type === "meat" || food.type === "carrot") {
+          this.correctSound.play();
+        } else if (
+          (this.animal.type === "dog" && food.type === "meat") ||
+          (this.animal.type === "rabbit" && food.type === "carrot")
+        ) {
           this.score += 10;
+          this.correctSound.play();
+        } else {
+          this.animal.lives -= 1;
+          this.incorrectSound.play(); //
         }
+
         console.log(`Score: ${this.score}`);
         console.log(`Lives: ${this.animal.lives}`);
 
-        return false; // Clean food when collides
+        return false;
       }
       return true;
     });
   }
 
-  clear() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  checkFoodCollision(food) {
+    const animalTop = this.animal.y;
+    const animalLeft = this.animal.x;
+    const animalRight = this.animal.x + this.animal.width;
+
+    const foodTop = food.y;
+    const foodBottom = food.y + food.height;
+    const foodLeft = food.x;
+    const foodRight = food.x + this.animal.width;
+
+    return (
+      foodBottom > animalTop &&
+      foodTop < animalTop &&
+      foodRight > animalLeft &&
+      foodLeft < animalRight
+    );
   }
 
   draw() {

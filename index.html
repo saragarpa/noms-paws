@@ -5,19 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game Layout</title>
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="shortcut icon" href="#" />
   </head>
+
   <body>
     <h1>GAME TITLE</h1>
+
     <div id="game-wrapper">
       <div class="box-top">
         <div class="u01"></div>
       </div>
       <div class="box-center">
         <div class="game-container">
-
           <!-- LEFT PANEL -->
           <div class="left-panel">
             <h2>Game Instructions</h2>
+            <div class = "instructions">
+              <h3>Objective</h3>
+            <p>
+              Control the animal (dog or rabbit) and help it collect the right
+              food while avoiding harmful ones.
+            </p>
+            <h3>Controls</h3>
+            <p>Use the arrow keys to move the animal.</p>
+
+            <h3>Scoring</h3>
+            <ul>
+              <li>
+                <strong>Dog:</strong> Earns points by collecting meat or candy.
+              </li>
+              <li>
+                <strong>Rabbit:</strong> Earns points by collecting carrots or
+                candy.
+              </li>
+            </ul>
+
+            <h3>Lives</h3>
+            <ul>
+              <li>
+                <strong>Dog:</strong> Loses a life when touching a carrot or
+                bug.
+              </li>
+              <li>
+                <strong>Rabbit:</strong> Loses a life when touching meat or a
+                bug.
+              </li>
+            </ul>
+
+            </div>
+            
+
+            <p>Good luck, and happy collecting! 🐾🥕</p>
+
+            <button id="ranking">Ranking</button>
           </div>
 
           <!--RIGHT PANEL -->
@@ -41,10 +81,19 @@
 
               <!-- Pause Screen -->
               <div id="pause-screen" style="display: none">
-                <h2>Juego en Pausa</h2>
+                <h2>PAUSE</h2>
                 <div class="button-container">
                   <button id="return-button">RETURN</button>
                   <button id="restart-button">RESTART</button>
+                  <button id="quit-button">QUIT</button>
+                </div>
+              </div>
+
+              <!-- Ranking Screen -->
+              <div id="ranking-screen" style="display: none">
+                <h2>Ranking</h2>
+                <ul id="ranking-list"></ul>
+                <div class="button-container">
                   <button id="quit-button">QUIT</button>
                 </div>
               </div>
@@ -58,7 +107,6 @@
               <button id="pause-button">PAUSE</button>
             </div>
           </div>
-          
         </div>
       </div>
       <div class="box-bottom">
@@ -66,9 +114,23 @@
       </div>
 
       <footer>
-        <img src="/assets/img/hcf03-flower-tulips.gif" />
-        MADE BY SARA 2024
-        <img src="/assets/img/hcf03-flower-tulips.gif" />
+        <div class="volume">
+          <label for="volume-slider">Volume:</label>
+          <input
+            type="range"
+            id="volume-slider"
+            min="0"
+            max="1"
+            step="0.1"
+            value="1"
+          />
+        </div>
+
+        <div>
+          <img src="/assets/img/hcf03-flower-tulips.gif" />
+          MADE BY SARA 2024
+          <img src="/assets/img/hcf03-flower-tulips.gif" />
+        </div>
       </footer>
     </div>
 

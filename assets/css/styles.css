@@ -17,12 +17,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("/assets/img/g01-bg-flower.gif");
+  background-image: url("/assets/img/i05-bg-cloth.gif");
 }
 
-#game-wrapper {
-  background-color: darkseagreen;
-}
 
 h1 {
   font-family: "SweetHeart";
@@ -60,12 +57,12 @@ h1 {
 .game-container {
   display: flex;
   width: 100%;
-  max-width: 1200px;
+  max-width: 970px;
   background-color: #f8f9fa;
   border-radius: 25px;
   padding: 50px;
   height: 70%;
-  border: 2px solid black;
+  border: 2px solid #4e9454;
   flex-wrap: wrap;
   background-image: url("/assets/img/x03-bg-checked.gif");
 }
@@ -112,7 +109,7 @@ h1 {
 .start-screen {
   position: absolute;
   width: 100%;
-  height: 90%;
+  height: 92%;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
@@ -124,7 +121,7 @@ h1 {
 #game-over-screen {
   position: absolute;
   width: 100%;
-  height: 90%;
+  height: 92%;
   display: flex;
   margin-top: 50px;
   flex-direction: column;
@@ -138,8 +135,24 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 92%;
+  margin-top: 50px;
   background: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+
+#ranking-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 92%;
+  margin-top: 50px;
+  background: pink;
   color: white;
   display: flex;
   flex-direction: column;
@@ -221,11 +234,19 @@ h1 {
 /* FOOTER */
 footer {
   display: flex;
-  flex-direction: row;
-  justify-content: right;
-  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
-  background-color: darkorchid;
+  
+}
+
+.volume{
+  display: flex;
+  flex-flow: row;
+  align-self: auto;
+  width: 50%;
+  margin-top: 10px;
 }
 
 
