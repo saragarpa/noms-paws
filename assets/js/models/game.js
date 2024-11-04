@@ -1,8 +1,7 @@
 class Game {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
-    this.canvas.width = 550;
-    this.canvas.height = 500;
+
     this.ctx = this.canvas.getContext("2d");
 
     this.drawIntervalId = undefined;
@@ -57,9 +56,11 @@ class Game {
       });
     });
 
-    document.getElementById("pause-button").addEventListener("click", () => {
-      this.pause();
-    });
+    document
+      .getElementsByClassName("pause-button")[0]
+      .addEventListener("click", () => {
+        this.pause();
+      });
 
     document.getElementById("return-button").addEventListener("click", () => {
       this.resumeGame();
@@ -77,10 +78,13 @@ class Game {
   }
 
   setVolume(volume) {
-    this.gameAudio.volume = volume;
-    this.correctSound.volume = volume;
-    this.incorrectSound.volume = volume;
-    this.clickSound.volume = volume;
+    const normalizedVolume = volume / 100;
+
+    // Volume is within [0, 1]
+    this.gameAudio.volume = Math.min(Math.max(normalizedVolume, 0), 1);
+    this.correctSound.volume = Math.min(Math.max(normalizedVolume, 0), 1);
+    this.incorrectSound.volume = Math.min(Math.max(normalizedVolume, 0), 1);
+    this.clickSound.volume = Math.min(Math.max(normalizedVolume, 0), 1);
   }
 
   onKeyEvent(event) {
@@ -91,10 +95,8 @@ class Game {
     }
   }
 
-
-
   // ***********RANKING SYSTEM***********
-  
+
   saveScore(score) {
     // If there are scores --> convert it(parse) to Array // If not empty array
     let scores = localStorage.getItem("scores")
@@ -115,22 +117,20 @@ class Game {
     const rankingList = document.getElementById("ranking-list");
     rankingList.innerHTML = "";
 
-    // If there are scores --> convert it(parse) to Array // If not empty array
     const scores = localStorage.getItem("scores")
       ? JSON.parse(localStorage.getItem("scores"))
       : [];
-
-    scores.forEach((score) => {
+      
+    scores.forEach((score, index) => {
       const listItem = document.createElement("li");
-      listItem.textContent = `${score} points`;
+      listItem.textContent = `${index + 1}. ${score} points`;
       rankingList.appendChild(listItem);
     });
 
     rankingScreen.style.display = "flex";
   }
+
   // ***********************************
-
-
 
   // *****GAME SCREENS*****
   startGame() {
@@ -166,8 +166,6 @@ class Game {
     this.saveScore(this.score);
   }
   // **********************
-
-
 
   // ++++++ GAME-SCREENS BUTTONS LOGIC ++++++
   resumeGame() {

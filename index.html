@@ -4,79 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game Layout</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Micro+5&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="shortcut icon" href="#" />
   </head>
 
   <body>
-    <h1>GAME TITLE</h1>
+    <!-- Game Title -->
+    <header>
+      <h1>Noms & Paws</h1>
+    </header>
 
-    <div id="game-wrapper">
-      <div class="box-top">
+    <!-- Main Game Wrapper -->
+    <main id="game-wrapper">
+      <!-- Top Section -->
+      <section class="box-top">
         <div class="u01"></div>
-      </div>
-      <div class="box-center">
+      </section>
+
+      <!-- Main Game Content -->
+      <section class="box-center">
         <div class="game-container">
-          <!-- LEFT PANEL -->
-          <div class="left-panel">
-            <h2>Game Instructions</h2>
-            <div class = "instructions">
-              <h3>Objective</h3>
-            <p>
-              Control the animal (dog or rabbit) and help it collect the right
-              food while avoiding harmful ones.
-            </p>
-            <h3>Controls</h3>
-            <p>Use the arrow keys to move the animal.</p>
-
-            <h3>Scoring</h3>
-            <ul>
-              <li>
-                <strong>Dog:</strong> Earns points by collecting meat or candy.
-              </li>
-              <li>
-                <strong>Rabbit:</strong> Earns points by collecting carrots or
-                candy.
-              </li>
-            </ul>
-
-            <h3>Lives</h3>
-            <ul>
-              <li>
-                <strong>Dog:</strong> Loses a life when touching a carrot or
-                bug.
-              </li>
-              <li>
-                <strong>Rabbit:</strong> Loses a life when touching meat or a
-                bug.
-              </li>
-            </ul>
-
+          <!-- Left Panel: Instructions and Ranking -->
+          <section class="left-panel">
+            <div class = "intro">
+              <h2>Instructions</h2>
+              <p>
+               Control the animal (dog or rabbit) and help it collect the right
+               food while avoiding harmful ones.
+              </p>
             </div>
-            
+            <div class="instructions-wrapper">
+              <article>
+                <h3>Controls</h3>
+                <p>Use the arrow keys to move the animal.</p>
+              </article>
 
-            <p>Good luck, and happy collecting! 🐾🥕</p>
+              <article>
+                <h3>Scoring</h3>
+                <ul>
+                 <li><img src="/assets/img/dog-icon.png" alt="dog icon" class ="animal-icon" /> : Earns points by collecting meat or candy.</li>
+                 <li><img src="/assets/img/rabbit-icon.png" alt="rabbit icon" class ="animal-icon" />:</strong> Earns points by collecting carrots or candy.</li>
+                </ul>
+              </article>
 
-            <button id="ranking">Ranking</button>
-          </div>
+              <article>
+                <h3>Lives</h3>
+                <ul>
+                 <li><img src="/assets/img/dog-icon.png" alt="dog icon" class ="animal-icon" />: Loses a life when touching a carrot or bug.</li>
+                 <li><img src="/assets/img/rabbit-icon.png" alt="rabbit icon" class ="animal-icon" />: Loses a life when touching meat or a bug.</li>
+                </ul>
+              </article>
+            </div>
 
-          <!--RIGHT PANEL -->
-          <div class="right-panel">
+            <div class="ranking-container">
+              <p>Good luck, and happy collecting! 🐾🥕</p>
+              <button id="ranking">Ranking</button>
+            </div>
+
+          </section>
+
+          <!-- Right Panel: Game Screens, Canvas, and Controls -->
+          <section class="right-panel">
             <div class="canvas-container">
               <!-- Start Screen -->
               <div id="start-screen" class="start-screen">
-                <button id="start-button">START BUTTON</button>
+                <div class="button-container">
+                  <button id="start-button">START</button>
+                </div>
               </div>
 
               <!-- GameOver Screen -->
-              <div
-                id="game-over-screen"
-                class="game-over-screen"
-                style="display: none"
-              >
+              <div id="game-over-screen" class="game-over-screen" style="display: none">
                 <h2>GAME OVER</h2>
-                <button id="restart-button">RESTART</button>
-                <button id="quit-button">QUIT</button>
+                <div class="button-container">
+                  <button id="restart-button">RESTART</button>
+                  <button id="quit-button">QUIT</button>
+                </div>
+                <div class="sad-animals-icons">
+                  <img src="/assets/img/sad-dog.png" alt="sad dog" class ="sad-animal-icon"/>
+                  <img src="/assets/img/sad-bunny.png" alt="sad bunny" class ="sad-animal-icon"/>
+                </div>
+                
               </div>
 
               <!-- Pause Screen -->
@@ -90,7 +105,7 @@
               </div>
 
               <!-- Ranking Screen -->
-              <div id="ranking-screen" style="display: none">
+              <div id="ranking-screen" style="display: none" width="550" height="500">
                 <h2>Ranking</h2>
                 <ul id="ranking-list"></ul>
                 <div class="button-container">
@@ -99,41 +114,47 @@
               </div>
 
               <!-- Canvas -->
-              <canvas id="canvas-game" width="800" height="600"></canvas>
+              <canvas id="canvas-game" width="550" height="500"></canvas>
             </div>
+
+            <!-- Right Panel Buttons -->
             <div class="buttons-right">
               <div id="score">COUNTER</div>
               <div id="lives">LIVES</div>
-              <button id="pause-button">PAUSE</button>
+              <button class="pause-button">PAUSE</button>
             </div>
-          </div>
+          </section>
         </div>
-      </div>
-      <div class="box-bottom">
-        <div class="s01"></div>
-      </div>
+      </section>
 
+      <!-- Bottom Section -->
+      <section class="box-bottom">
+        <div class="s01"></div>
+      </section>
+
+      <!-- Footer: Volume Control and Credits -->
       <footer>
         <div class="volume">
-          <label for="volume-slider">Volume:</label>
-          <input
-            type="range"
-            id="volume-slider"
-            min="0"
-            max="1"
-            step="0.1"
-            value="1"
-          />
+          <label class="slider">
+            <input type="range" id="volume-slider">
+            <svg class="volume" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve">
+                <g>
+                    <path d="M18.36 19.36a1 1 0 0 1-.705-1.71C19.167 16.148 20 14.142 20 12s-.833-4.148-2.345-5.65a1 1 0 1 1 1.41-1.419C20.958 6.812 22 9.322 22 12s-1.042 5.188-2.935 7.069a.997.997 0 0 1-.705.291z" fill="currentColor" data-original="#000000"></path>
+                    <path d="M15.53 16.53a.999.999 0 0 1-.703-1.711C15.572 14.082 16 13.054 16 12s-.428-2.082-1.173-2.819a1 1 0 1 1 1.406-1.422A6 6 0 0 1 18 12a6 6 0 0 1-1.767 4.241.996.996 0 0 1-.703.289zM12 22a1 1 0 0 1-.707-.293L6.586 17H4c-1.103 0-2-.897-2-2V9c0-1.103.897-2 2-2h2.586l4.707-4.707A.998.998 0 0 1 13 3v18a1 1 0 0 1-1 1z" fill="currentColor" data-original="#000000"></path>
+                </g>
+            </svg>
+        </label>
         </div>
 
-        <div>
-          <img src="/assets/img/hcf03-flower-tulips.gif" />
+        <div class="credits">
+          <img src="/assets/img/hcf03-flower-tulips.gif" alt="flower icon" />
           MADE BY SARA 2024
-          <img src="/assets/img/hcf03-flower-tulips.gif" />
+          <img src="/assets/img/hcf03-flower-tulips.gif" alt="flower icon" />
         </div>
       </footer>
-    </div>
+    </main>
 
+    <!-- Scripts -->
     <script src="assets/js/constants.js"></script>
     <script src="assets/js/models/food.js"></script>
     <script src="assets/js/models/animal.js"></script>

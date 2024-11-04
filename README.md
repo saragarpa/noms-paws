@@ -1,5 +1,6 @@
 # Project
 
+<br>
 
 ## Description
 
@@ -54,3 +55,9 @@ If you would like to contribute to the game, feel free to fork the repository an
 ## Assets
 
 Art and music are from free sources websites, I do not own any of the assets the purpose of this project is only for learning.
+
+
+## VERSION 1.0 (addittions, issues,... )
+- 
+
+  
