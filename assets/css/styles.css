@@ -4,7 +4,6 @@
   src: url(../fonts/BubblePix.ttf);
 }
 
-
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +21,6 @@ body {
   background-image: url("../img/i05-bg-cloth.gif");
 }
 
-
 h1 {
   font-size: 5.62rem;
   color: #286400;
@@ -30,10 +28,9 @@ h1 {
 }
 
 #game-container {
-  transform: scale(0.88); 
-  transform-origin: center; 
+  transform: scale(0.88);
+  transform-origin: center;
 }
-
 
 .u01 {
   background: url(../img/f-ue.gif) repeat-x;
@@ -87,7 +84,7 @@ h1 {
 
 h2 {
   text-align: center;
-  font-size: 30px;
+  font-size: 1.875rem;
   color: #fdf3e7;
 }
 
@@ -148,7 +145,7 @@ li {
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 #ranking:focus {
@@ -185,12 +182,12 @@ li {
   position: relative;
   max-width: 530px;
   height: 480px;
+  margin-top: 50px;
 }
 
 #canvas-game {
   width: 100%;
   height: 100%;
-  margin-top: 30px;
 }
 
 /* ------------- GAME-SCREENS ------------- */
@@ -203,20 +200,17 @@ li {
   left: 0;
   width: 100%;
   height: 100%;
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
 }
 
 #game-over-screen h2,
 #ranking-screen h2,
 .start-screen h2,
 #pause-screen h2 {
-  font-size: 50px;
+  font-size: 3.125rem;
 }
-
 
 .start-screen {
   background: radial-gradient(#dac079 15%, transparent 16%),
@@ -232,19 +226,14 @@ li {
 }
 
 #game-over-screen {
-  background-color: #382d2d;  
+  background-color: #382d2d;
 }
 
-.animals-icons { 
+.animals-icons {
   gap: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.sad-animal-icon {
-  width:60px;
-  height:60px;
 }
 
 #ranking-screen {
@@ -256,12 +245,13 @@ li {
   padding: 0;
   margin: 0;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
+.sad-animal-icon,
 .happy-animal-icon {
-  width:60px;
-  height:60px;
+  width: 60px; 
+  height: 60px; 
 }
 
 /* ------------- SCREEN-BUTTONS ------------- */
@@ -271,35 +261,38 @@ li {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding: 20px;
-  
+  padding: 1.25em;
 }
 
-#return-button, #restart-button, #quit-button {
+#return-button,
+#restart-button,
+#quit-button {
   outline: none;
   font-family: "BubblePix";
-  font-size: 15px;
+  font-size: 0.93rem;
   color: #815731;
   padding: 1em;
   padding-left: 3em;
   padding-right: 3em;
-  border: 2px dashed #DAA06D;
+  border: 2px dashed #daa06d;
   border-radius: 15px;
-  background-color: #EADDCA;
-  box-shadow: 0 0 0 4px #EADDCA, 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
-  transition: .1s ease-in-out, .4s color;
+  background-color: #eaddca;
+  box-shadow: 0 0 0 4px #eaddca, 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
+  transition: 0.1s ease-in-out, 0.4s color;
 }
 
-#return-button:active, #restart-button:active, #quit-button:active {
+#return-button:active,
+#restart-button:active,
+#quit-button:active {
   transform: translateX(0.1em) translateY(0.1em);
-  box-shadow: 0 0 0 4px #EADDCA, 1.5px 1.5px 2.5px 1.5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 4px #eaddca, 1.5px 1.5px 2.5px 1.5px rgba(0, 0, 0, 0.5);
 }
 
 #start-button {
   width: fit-content;
   min-width: 100px;
-  height: 45px; 
-  padding: 10px 30px; 
+  height: 45px;
+  padding: 10px 30px;
   border-radius: 20px;
   border: 2.5px solid #000000;
   color: white;
@@ -309,9 +302,9 @@ li {
   transition: all 0.2s ease-in-out 0ms;
   user-select: none;
   text-align: center;
-  font-size: 30px;
+  font-size: 1.87rem;
   font-family: "BubblePix";
-  line-height: 25px; 
+  line-height: 25px;
 }
 
 #start-button:hover {
@@ -323,23 +316,22 @@ li {
   transform: scale(0.95);
 }
 
-
 /* ------------- BUTTONS-RIGHT-TOP ------------- */
 .buttons-right {
   position: absolute;
   width: 100%;
   top: 10px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  padding: 30px;
-  
+  padding: 1.87em;
 }
 
 #lives,
 #score {
   background-color: rgb(255, 165, 0);
-  padding: 15px;
+  padding: 0.93em;
   color: white;
   border-radius: 5px;
   display: flex;
@@ -383,7 +375,7 @@ footer {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 1.25em;
 }
 
 /* level settings 👇 */
@@ -454,11 +446,19 @@ footer {
 }
 
 /*---------------------------- RESPONSIVE STYLES ---------------------------- */
+
 @media (max-width: 768px) {
-  .game-container {
-    flex-direction: column;
-    height: auto;
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  .game-content {
     padding: 20px;
+    flex-direction: column;
   }
 
   .left-panel,
@@ -467,54 +467,46 @@ footer {
     padding: 20px;
   }
 
-  #game-over-screen,
-  #ranking-screen,
-  .start-screen,
-  #pause-screen {
-    width: 100%;
-    height: 100%;
-    padding: 15px;
+  .canvas-wrapper {
+    max-width: 100%;
+    height: auto;
   }
 
-  .button-container {
+  #canvas-game {
+    height: auto;
+  }
+
+  .button-wrapper {
     flex-direction: column;
-    width: 100%;
-    gap: 15px;
+    gap: 10px;
+    padding: 0.5em;
   }
 
-  #start-button {
-    font-size: 18px;
-    padding: 8px 16px;
+  #start-button,
+  #pause-button,
+  #return-button,
+  #restart-button,
+  #quit-button {
+    font-size: 1.5rem;
+    padding: 10px;
+  }
+
+  #ranking,
+  #lives {
+    font-size: 1rem;
+    padding: 0.5em;
+  }
+
+  #game-over-screen h2,
+  #ranking-screen h2,
+  .start-screen h2,
+  #pause-screen h2 {
+    font-size: 2.5rem;
   }
 
   .buttons-right {
     flex-direction: column;
     position: static;
     gap: 10px;
-    margin-top: 10px;
-  }
-
-  #lives,
-  #score {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 10px;
-    width: auto;
-  }
-
-  .canvas-container {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .slider {
-    width: 80%;
-    margin: 10px auto;
-  }
-
-  #game-wrapper {
-    transform: scale(0.85); 
-    transform-origin: center; 
   }
 }
-

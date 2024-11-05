@@ -320,7 +320,7 @@ class Game {
     for (let i = 0; i < this.animal.lives; i++) {
       const heartImg = document.createElement("img");
       heartImg.classList.add("heart-icon");
-      heartImg.src = "/assets/img/heart.png";
+      heartImg.src = "assets/img/heart.png";
       livesContainer.appendChild(heartImg);
     }
   }
