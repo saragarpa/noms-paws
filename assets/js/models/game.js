@@ -22,12 +22,13 @@ class Game {
     this.gameAudio = new Audio("assets/sounds/game-audio.mp3");
     this.correctSound = new Audio("assets/sounds/correct.mp3");
     this.incorrectSound = new Audio("assets/sounds/incorrect.mp3");
-    this.clickSound = new Audio("assets/sounds/click.mp3");
+    this.clickSound = new Audio("/assets/sounds/click.mp3");
 
     this.setListeners();
   }
 
   setListeners() {
+
     // Movements Animals
     document.addEventListener("keydown", (event) => {
       if (this.isGameRunning && !this.isPaused) {
@@ -56,12 +57,10 @@ class Game {
       });
     });
 
-    document
-      .getElementById("pause-button")
-      .addEventListener("click", () => {
-        this.clickSound.play();
-        this.pause();
-      });
+    document.getElementById("pause-button").addEventListener("click", () => {
+      this.clickSound.play();
+      this.pause();
+    });
 
     document.getElementById("return-button").addEventListener("click", () => {
       this.resumeGame();
@@ -97,15 +96,13 @@ class Game {
     }
   }
 
-
   // ***********RANKING SYSTEM***********
 
   saveScore(score) {
-    // If there are scores --> convert(parse)  JSON string to Array // If not empty array
+    // If there are scores --> convert(parse) JSON string to Array // If not, empty array
     let scores = localStorage.getItem("scores")
       ? JSON.parse(localStorage.getItem("scores"))
       : [];
-    
 
     scores.push(score);
     scores.sort((a, b) => b - a);
@@ -143,12 +140,15 @@ class Game {
     this.isGameRunning = true;
     const startScreen = document.getElementById("start-screen");
     startScreen.style.display = "none";
-
+  
+    this.animal.lives = 3; 
     this.gameAudio.loop = true;
     this.gameAudio.play();
-
-    this.start();
+  
+    this.drawCounters(); 
+    this.start(); 
   }
+  
 
   pause() {
     if (this.isGameRunning && !this.isPaused) {
@@ -172,7 +172,6 @@ class Game {
     this.saveScore(this.score);
   }
   // ***********************************
-
 
   // ++++++ GAME-SCREENS BUTTONS LOGIC ++++++
   resumeGame() {
@@ -219,6 +218,8 @@ class Game {
 
     this.gameAudio.pause();
     this.gameAudio.currentTime = 0;
+    this.animal.lives = 0;
+    this.drawCounters(); 
   }
   // ++++++++++++++++++++++++++++++++++++++
 
@@ -234,6 +235,7 @@ class Game {
         this.move();
         this.checkCollisions();
         this.tick++;
+        
 
         if (this.tick >= 65) {
           this.tick = 0;
@@ -273,7 +275,7 @@ class Game {
           this.correctSound.play();
         } else {
           this.animal.lives -= 1;
-          this.incorrectSound.play(); 
+          this.incorrectSound.play();
         }
         return false;
       }
@@ -313,14 +315,14 @@ class Game {
 
     // LIVES
     const livesContainer = document.getElementById("lives");
-    livesContainer.innerHTML = "";
+    livesContainer.innerHTML = ""; 
     livesContainer.textContent = "LIVES: ";
 
-    // Add Heart PNG
+    // Add HEART 
     for (let i = 0; i < this.animal.lives; i++) {
       const heartImg = document.createElement("img");
       heartImg.classList.add("heart-icon");
-      heartImg.src = "assets/img/heart.png";
+      heartImg.src = "assets/img/heart.png"; 
       livesContainer.appendChild(heartImg);
     }
   }
