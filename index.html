@@ -3,26 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Layout</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Micro+5&display=swap" rel="stylesheet">
+    <title>Noms & Paws</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="shortcut icon" href="#" />
+    <link rel="shortcut icon" href="/assets/img/dog-icon.png" />
   </head>
 
   <body>
-    <!-- Game Title -->
-    <header>
+    <!-- Main Game Container -->
+    <main id="game-container">
       <h1>Noms & Paws</h1>
-    </header>
-
-    <!-- Main Game Wrapper -->
-    <main id="game-wrapper">
       <!-- Top Section -->
       <section class="box-top">
         <div class="u01"></div>
@@ -30,7 +21,7 @@
 
       <!-- Main Game Content -->
       <section class="box-center">
-        <div class="game-container">
+        <div class="game-content"> 
           <!-- Left Panel: Instructions and Ranking -->
           <section class="left-panel">
             <div class = "intro">
@@ -40,10 +31,10 @@
                food while avoiding harmful ones.
               </p>
             </div>
-            <div class="instructions-wrapper">
+            <div class="instructions">
               <article>
                 <h3>Controls</h3>
-                <p>Use the arrow keys to move the animal.</p>
+                <p>Use the arrow keys to move the animal and press space to change the animal</p>
               </article>
 
               <article>
@@ -62,9 +53,12 @@
                 </ul>
               </article>
             </div>
-
-            <div class="ranking-container">
-              <p>Good luck, and happy collecting! 🐾🥕</p>
+            
+            <div class="ranking-area">
+              <div>
+                <p>Good luck, <br>and happy collecting!</p>
+                <p>🐾🥕</p>
+              </div>
               <button id="ranking">Ranking</button>
             </div>
 
@@ -72,22 +66,22 @@
 
           <!-- Right Panel: Game Screens, Canvas, and Controls -->
           <section class="right-panel">
-            <div class="canvas-container">
+            <div class="canvas-wrapper">
               <!-- Start Screen -->
               <div id="start-screen" class="start-screen">
-                <div class="button-container">
+                <div class="button-wrapper">
                   <button id="start-button">START</button>
                 </div>
               </div>
 
               <!-- GameOver Screen -->
-              <div id="game-over-screen" class="game-over-screen" style="display: none">
+              <div id="game-over-screen" style="display: none">
                 <h2>GAME OVER</h2>
-                <div class="button-container">
+                <div class="button-wrapper">
                   <button id="restart-button">RESTART</button>
                   <button id="quit-button">QUIT</button>
                 </div>
-                <div class="sad-animals-icons">
+                <div class="animals-icons">
                   <img src="/assets/img/sad-dog.png" alt="sad dog" class ="sad-animal-icon"/>
                   <img src="/assets/img/sad-bunny.png" alt="sad bunny" class ="sad-animal-icon"/>
                 </div>
@@ -97,7 +91,7 @@
               <!-- Pause Screen -->
               <div id="pause-screen" style="display: none">
                 <h2>PAUSE</h2>
-                <div class="button-container">
+                <div class="button-wrapper">
                   <button id="return-button">RETURN</button>
                   <button id="restart-button">RESTART</button>
                   <button id="quit-button">QUIT</button>
@@ -105,11 +99,15 @@
               </div>
 
               <!-- Ranking Screen -->
-              <div id="ranking-screen" style="display: none" width="550" height="500">
+              <div id="ranking-screen" style="display: none">
                 <h2>Ranking</h2>
                 <ul id="ranking-list"></ul>
-                <div class="button-container">
+                <div class="button-wrapper">
                   <button id="quit-button">QUIT</button>
+                </div>
+                <div class="animals-icons">
+                  <img src="/assets/img/happy-dog.png" alt="happy dog" class ="happy-animal-icon"/>
+                  <img src="/assets/img/happy-bunny.png" alt="happy bunny" class ="happy-animal-icon"/>
                 </div>
               </div>
 
@@ -121,7 +119,7 @@
             <div class="buttons-right">
               <div id="score">COUNTER</div>
               <div id="lives">LIVES</div>
-              <button class="pause-button">PAUSE</button>
+              <button id="pause-button">PAUSE</button>
             </div>
           </section>
         </div>

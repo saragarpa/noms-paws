@@ -10,7 +10,6 @@ class Background {
     this.bgImg = new Image();
     this.bgImg.src = "assets/img/background-01.png";
     
-    // Set image dimensions
     this.bgImg.width = this.width;
     this.bgImg.height = this.height;
   }

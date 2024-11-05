@@ -27,10 +27,6 @@ class Animal {
 
     this.isMoving = false;
     this.facingDirection = "left";
-
-    this.score = 0;
-    this.lives = 3;
-
   }
 
   draw() {
@@ -42,33 +38,34 @@ class Animal {
       img = this.rabbitImg;
     }
 
-    // Si la dirección es 'right', se invierte la imagen
+    // If facing direction is 'right', mirror the image
     if (this.facingDirection === "right") {
-      this.ctx.save(); // Guardamos como está la imagen actualmente antes de girarla
-      this.ctx.scale(-1, 1); // Invertir la escala horizontalmente
+      this.ctx.save(); // Save the current context state before applying transformations
+      this.ctx.scale(-1, 1); // Flip horizontally
 
-      // La imagen cuando mira a "right"
+      // Draw the image facing "right"
       this.ctx.drawImage(
         img,
-        (this.frameIndex / this.frames) * img.width - 30, // Parte horizontal
-        0, // Parte vertical (usamos el primer sprite)
-        (1 / this.frames) * img.width, // Ancho del frame
-        img.height, // Altura de la imagen
-        -this.x - this.width, // Ajustar posición x
+        (this.frameIndex / this.frames) * img.width - 30, // Calculate horizontal frame position
+        0, // Set vertical position to start from the first row of the sprite sheet
+        (1 / this.frames) * img.width, // Set frame width based on total frames
+        img.height, // Full image height
+        -this.x - this.width, // Adjust x position for the mirrored image
         this.y,
         this.width,
         this.height
       );
 
-      //La imagen cuando mira a "left"
+      // Restore the context state 
       this.ctx.restore();
     } else {
+      // Draw the image facing "left" (default direction)
       this.ctx.drawImage(
         img,
-        (this.frameIndex / this.frames) * img.width - 30, // Parte horizontal
-        0, // Parte vertical (usamos el primer sprite)
-        (1 / this.frames) * img.width, // Ancho del frame
-        img.height, // Altura de la imagen
+        (this.frameIndex / this.frames) * img.width - 30, // Calculate horizontal frame position
+        0, // Set vertical position to start from the first row of the sprite sheet
+        (1 / this.frames) * img.width, // Set frame width based on total frames
+        img.height, // Full image height
         this.x,
         this.y,
         this.width,
@@ -140,5 +137,4 @@ class Animal {
     }
     this.frameIndex = 0; // When animal changes it starts on the first frame
   }
-
 }

@@ -22,7 +22,7 @@ class Game {
     this.gameAudio = new Audio("/assets/sounds/game-audio.mp3");
     this.correctSound = new Audio("/assets/sounds/correct.mp3");
     this.incorrectSound = new Audio("/assets/sounds/incorrect.mp3");
-    this.clickSound = new Audio("/assets/sounds/click.wav");
+    this.clickSound = new Audio("/assets/sounds/click.mp3");
 
     this.setListeners();
   }
@@ -57,8 +57,9 @@ class Game {
     });
 
     document
-      .getElementsByClassName("pause-button")[0]
+      .getElementById("pause-button")
       .addEventListener("click", () => {
+        this.clickSound.play();
         this.pause();
       });
 
@@ -68,6 +69,7 @@ class Game {
 
     document.getElementById("ranking").addEventListener("click", () => {
       this.showScores();
+      this.clickSound.play();
     });
 
     // Audio slider
@@ -95,14 +97,15 @@ class Game {
     }
   }
 
+
   // ***********RANKING SYSTEM***********
 
   saveScore(score) {
-    // If there are scores --> convert it(parse) to Array // If not empty array
+    // If there are scores --> convert(parse)  JSON string to Array // If not empty array
     let scores = localStorage.getItem("scores")
       ? JSON.parse(localStorage.getItem("scores"))
       : [];
-    console.log(scores);
+    
 
     scores.push(score);
     scores.sort((a, b) => b - a);
@@ -120,7 +123,7 @@ class Game {
     const scores = localStorage.getItem("scores")
       ? JSON.parse(localStorage.getItem("scores"))
       : [];
-      
+
     scores.forEach((score, index) => {
       const listItem = document.createElement("li");
       listItem.textContent = `${index + 1}. ${score} points`;
@@ -128,6 +131,9 @@ class Game {
     });
 
     rankingScreen.style.display = "flex";
+    document.getElementById("game-over-screen").style.display = "none";
+    document.getElementById("pause-screen").style.display = "none";
+    this.pause();
   }
 
   // ***********************************
@@ -165,7 +171,8 @@ class Game {
 
     this.saveScore(this.score);
   }
-  // **********************
+  // ***********************************
+
 
   // ++++++ GAME-SCREENS BUTTONS LOGIC ++++++
   resumeGame() {
@@ -235,7 +242,6 @@ class Game {
 
         if (this.animal.lives < 0) {
           this.gameOver();
-          console.log(`RIP Animal`);
         }
       }, this.fps);
     }
@@ -250,8 +256,6 @@ class Game {
 
     const newFood = new Food(this.ctx, randomFood, this.score);
     this.food.push(newFood);
-
-    console.log(`Food on canvas: ${this.food.length}`);
   }
 
   checkCollisions() {
@@ -269,12 +273,8 @@ class Game {
           this.correctSound.play();
         } else {
           this.animal.lives -= 1;
-          this.incorrectSound.play(); //
+          this.incorrectSound.play(); 
         }
-
-        console.log(`Score: ${this.score}`);
-        console.log(`Lives: ${this.animal.lives}`);
-
         return false;
       }
       return true;
