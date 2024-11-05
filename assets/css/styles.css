@@ -24,7 +24,7 @@ body {
 
 
 h1 {
-  font-size: 90px;
+  font-size: 5.62rem;
   color: #286400;
   text-align: center;
 }
@@ -46,19 +46,19 @@ h1 {
   margin: 0 19px;
 }
 .box-top {
-  background-image: url(../img/f-kado1.gif), url(/assets/img/f-kado2.gif);
+  background-image: url(../img/f-kado1.gif), url(../img/f-kado2.gif);
   background-position: top left, top right;
   background-repeat: no-repeat, no-repeat;
   height: 35px;
 }
 .box-center {
-  background-image: url(../img/f-migi.gif), url(/assets/img/f-hidari.gif);
+  background-image: url(../img/f-migi.gif), url(../img/f-hidari.gif);
   background-position: top right, top left;
   background-repeat: repeat-y, repeat-y;
   padding: 10px 29px;
 }
 .box-bottom {
-  background-image: url(../img/f-kado3.gif), url(/assets/img/f-kado4.gif);
+  background-image: url(../img/f-kado3.gif), url(../img/f-kado4.gif);
   background-position: top left, top right;
   background-repeat: no-repeat, no-repeat;
   height: 35px;

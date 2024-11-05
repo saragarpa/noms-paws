@@ -19,10 +19,10 @@ class Game {
     this.isPaused = false;
 
     // Audios
-    this.gameAudio = new Audio("/assets/sounds/game-audio.mp3");
-    this.correctSound = new Audio("/assets/sounds/correct.mp3");
-    this.incorrectSound = new Audio("/assets/sounds/incorrect.mp3");
-    this.clickSound = new Audio("/assets/sounds/click.mp3");
+    this.gameAudio = new Audio("assets/sounds/game-audio.mp3");
+    this.correctSound = new Audio("assets/sounds/correct.mp3");
+    this.incorrectSound = new Audio("assets/sounds/incorrect.mp3");
+    this.clickSound = new Audio("assets/sounds/click.mp3");
 
     this.setListeners();
   }

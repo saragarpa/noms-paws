@@ -4,7 +4,7 @@ class Food {
     this.type = type;
 
     this.image = new Image();
-    this.image.src = `/assets/img/${type}.png`;
+    this.image.src = `assets/img/${type}.png`;
 
     this.x = Math.random() * (ctx.canvas.width - 50); 
     this.y = 0;
