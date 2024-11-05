@@ -12,7 +12,7 @@
 
 body {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,7 +28,7 @@ h1 {
 }
 
 #game-container {
-  transform: scale(0.88);
+  transform: scale(0.84);
   transform-origin: center;
 }
 
