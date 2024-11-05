@@ -62,10 +62,10 @@ class Animal {
       // Draw the image facing "left" (default direction)
       this.ctx.drawImage(
         img,
-        (this.frameIndex / this.frames) * img.width - 30, // Calculate horizontal frame position
-        0, // Set vertical position to start from the first row of the sprite sheet
-        (1 / this.frames) * img.width, // Set frame width based on total frames
-        img.height, // Full image height
+        (this.frameIndex / this.frames) * img.width - 30, 
+        0, 
+        (1 / this.frames) * img.width, 
+        img.height, 
         this.x,
         this.y,
         this.width,

@@ -1,7 +1,7 @@
 /* GLOBAL STYLES */
 @font-face {
   font-family: "BubblePix";
-  src: url(/assets/fonts/BubblePix.ttf);
+  src: url(../fonts/BubblePix.ttf);
 }
 
 
@@ -19,7 +19,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: "BubblePix";
-  background-image: url("/assets/img/i05-bg-cloth.gif");
+  background-image: url("../img/i05-bg-cloth.gif");
 }
 
 
