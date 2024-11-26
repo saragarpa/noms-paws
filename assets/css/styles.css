@@ -102,6 +102,13 @@ li {
   list-style-type: none;
 }
 
+.instructions {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  gap: 35px;
+}
+
 .animal-icon {
   width: 22px;
   height: 22px;
