@@ -96,10 +96,9 @@ class Game {
     }
   }
 
-  // ***********RANKING SYSTEM***********
+  // **** RANKING SYSTEM ****
 
   saveScore(score) {
-    // If there are scores --> convert(parse) JSON string to Array // If not, empty array
     let scores = localStorage.getItem("scores")
       ? JSON.parse(localStorage.getItem("scores"))
       : [];
@@ -108,7 +107,7 @@ class Game {
     scores.sort((a, b) => b - a);
     scores = scores.slice(0, 3);
 
-    // Save current array scores as a JSON string
+    
     localStorage.setItem("scores", JSON.stringify(scores));
   }
 
@@ -133,9 +132,9 @@ class Game {
     this.pause();
   }
 
-  // ***********************************
+ 
 
-  // *****GAME SCREENS*****
+  // **** GAME SCREENS ****
   startGame() {
     this.isGameRunning = true;
     const startScreen = document.getElementById("start-screen");
@@ -171,9 +170,7 @@ class Game {
 
     this.saveScore(this.score);
   }
-  // ***********************************
 
-  // ++++++ GAME-SCREENS BUTTONS LOGIC ++++++
   resumeGame() {
     if (this.isPaused) {
       this.isPaused = false;
@@ -221,7 +218,6 @@ class Game {
     this.animal.lives = 0;
     this.drawCounters(); 
   }
-  // ++++++++++++++++++++++++++++++++++++++
 
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -248,6 +244,8 @@ class Game {
       }, this.fps);
     }
   }
+
+  // **** GAME MECHANICS ****
 
   addFood() {
     // Keep only food that is within canvas

@@ -46,11 +46,11 @@ class Animal {
       // Draw the image facing "right"
       this.ctx.drawImage(
         img,
-        (this.frameIndex / this.frames) * img.width - 30, // Calculate horizontal frame position
-        0, // Set vertical position to start from the first row of the sprite sheet
-        (1 / this.frames) * img.width, // Set frame width based on total frames
-        img.height, // Full image height
-        -this.x - this.width, // Adjust x position for the mirrored image
+        (this.frameIndex / this.frames) * img.width - 30, 
+        0, 
+        (1 / this.frames) * img.width, 
+        img.height, 
+        -this.x - this.width, 
         this.y,
         this.width,
         this.height
@@ -79,7 +79,6 @@ class Animal {
 
     if (this.tick > 2.5) {
       this.tick = 0;
-      // Sprite animation
       this.frameIndex++;
 
       // Restart frame if there are no more sprite poses

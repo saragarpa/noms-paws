@@ -57,7 +57,7 @@ Art and music are from free sources websites, I do not own any of the assets.
 ## VERSION 1.0 (addittions, issues,... )
 
 - Add animations per correct/incorrect food.
-- When returning from a screen animal should always be dog.
+- When returning from a screen, animal should always be dog.
 - Improve responsiveness.
 
 
