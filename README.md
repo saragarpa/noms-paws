@@ -8,6 +8,8 @@
 
 **Noms & Paws** is an interactive game where players control an animal (either a dog or a rabbit) and must collect different types of food while avoiding other objects. The goal is to score points by collecting the correct food items if the player touches the wrong objects the animal loses a life.
 
+**Check out the project here!** https://saragarpa.github.io/noms-paws/
+
 ## Game Objectives
 
 - **Food Collection:**
@@ -37,7 +39,7 @@
 
 ## Difficulty
 
-As the player progresses, the game's difficulty increases. For every 50 points scored, the speed at which food falls increases, making it harder for the player to keep up and requiring quicker coordination to avoid incorrect items.
+As the player progresses, the game's difficulty increases. For every 100 points scored, the speed at which food falls increases, making it harder for the player to keep up and requiring quicker coordination to avoid incorrect items.
 
 ## File Structure
 
@@ -45,10 +47,6 @@ As the player progresses, the game's difficulty increases. For every 50 points s
 - `styles.css`: Defines the styles and design of the game.
 - `game.js`: Contains the main game logic, collision detection, and scoring.
 - `main.js`: Handles the game start events and updates the DOM.
-
-## Contributions
-
-If you would like to contribute to the game, feel free to fork the repository and submit a pull request with your improvements!
 
 ## Assets
 
