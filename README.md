@@ -48,10 +48,6 @@ As the player progresses, the game's difficulty increases. For every 100 points 
 - `game.js`: Contains the main game logic, collision detection, and scoring.
 - `main.js`: Handles the game start events and updates the DOM.
 
-## Assets
-
-Art and music are from free sources websites, I do not own any of the assets.
-
 ## VERSION 1.0 (addittions, issues,... )
 
 - Add animations per correct/incorrect food.

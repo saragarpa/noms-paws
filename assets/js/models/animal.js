@@ -21,7 +21,7 @@ class Animal {
     this.rabbitImg.src = "assets/img/bunny.png";
 
     // Sprite config
-    this.frames = 5; // Total frames on sprite sheet
+    this.frames = 5; 
     this.tick = 0; // Animation counter
     this.frameIndex = 0; // Current animation index
 
