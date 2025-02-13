@@ -132,7 +132,7 @@ li {
   align-items: center;
   appearance: none;
   margin-top: 10px;
-  background-color: rgb(255, 165, 0);
+  background-color: #436B4D;
   border-radius: 8px;
   border-width: 2px;
   color: white;
@@ -163,7 +163,7 @@ li {
 
 #ranking:hover {
   box-shadow: rgba(50, 58, 50, 0.205) 0 4px 8px,
-    rgba(64, 66, 68, 0.219) 0 7px 13px -3px, #d38124 0 -3px 0 inset;
+    rgba(64, 66, 68, 0.219) 0 7px 13px -3px, #28422e 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
@@ -337,9 +337,9 @@ li {
 
 #lives,
 #score {
-  background-color: rgb(255, 165, 0);
+  background-color: #CEB674;
   padding: 0.93em;
-  color: white;
+  color: black;
   border-radius: 5px;
   display: block;
   justify-content: center;

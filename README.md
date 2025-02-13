@@ -2,7 +2,7 @@
 
 <br>
 
-<img src="./assets//img/screenshoot.png" alt="Noms & Paws Game Screenshot" width="500"/>
+<!--<img src="./assets//img/screenshoot.png" alt="Noms & Paws Game Screenshot" width="500"/>-->
 
 ## Description
 
